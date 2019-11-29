@@ -1,0 +1,55 @@
+import { Story, Preview, Meta, Props, html } from '@open-wc/demoing-storybook';
+
+import '../svelte-wc.js';
+
+<Meta 
+  title="SvelteWc"
+  parameters={{
+    component: "svelte-wc",
+    options: { selectedPanel: "storybookjs/knobs/panel" }
+  }}
+/>
+
+# SvelteWc
+
+A component for...
+
+## Features:
+
+- a
+- b
+- ...
+
+## How to use
+
+### Installation
+
+```bash
+yarn add svelte-wc
+```
+
+```js
+import 'svelte-wc/svelte-wc.js';
+```
+
+<Preview withToolbar>
+  <Story name="Simple">
+    {html`
+      <svelte-wc></svelte-wc>
+    `}
+  </Story>
+</Preview>
+
+## API
+
+<Props of="svelte-wc" />
+
+## Variations
+
+###### Custom Title
+
+<Story name="Custom Title">
+  {html`
+    <svelte-wc .title=${'Hello World'}></svelte-wc>
+  `}
+</Story>

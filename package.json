@@ -1,0 +1,58 @@
+{
+  "name": "svelte-wc",
+  "version": "0.0.0",
+  "description": "Webcomponent svelte-wc following open-wc recommendations",
+  "author": "svelte-wc",
+  "license": "MIT",
+  "main": "index.js",
+  "module": "index.js",
+  "scripts": {
+    "dev": "rollup --config --watch",
+    "build": "rollup --config",
+    "generateDocs": "node script/generateDocs.js",
+    "test": "karma start --coverage",
+    "test:watch": "karma start --auto-watch=true --single-run=false",
+    "storybook": "start-storybook -s dist",
+    "storybook:build": "build-storybook"
+  },
+  "dependencies": {
+    "lit-html": "^1.0.0",
+    "lit-element": "^2.0.1"
+  },
+  "devDependencies": {
+    "@open-wc/eslint-config": "^1.0.0",
+    "@open-wc/testing": "^2.0.0",
+    "@open-wc/testing-karma": "^3.0.0",
+    "@storybook/html": "^5.2.6",
+    "babel-loader": "^8.0.6",
+    "es-dev-server": "^1.5.0",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.7.0",
+    "eslint-plugin-svelte3": "^2.7.3",
+    "glob": "^7.1.6",
+    "husky": "^1.0.0",
+    "lint-staged": "^8.0.0",
+    "prettier-plugin-svelte": "^0.7.0",
+    "rollup": "^1.12.0",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-livereload": "^1.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-svelte": "^5.0.3",
+    "rollup-plugin-terser": "^5.1.2",
+    "svelte": "^3.0.0",
+    "sveltedoc-parser": "^2.3.1",
+    "webpack-merge": "^4.1.5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,svelte}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
