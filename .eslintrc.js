@@ -10,6 +10,14 @@ module.exports = {
     es6: true,
     browser: true,
   },
+  rules: {
+    'no-use-before-define': ['error', 'nofunc'],
+    'import/extensions': ['error', 'always', { js: 'never' }],
+    'import/no-extraneous-dependencies': [
+      'error',
+      { devDependencies: ['**/*.test.js', '**/*.spec.js', , 'script/*.js'] },
+    ],
+  },
   plugins: ['svelte3'],
   overrides: [
     {
