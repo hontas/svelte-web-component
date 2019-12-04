@@ -3,6 +3,11 @@
 
   export let disabled = false;
   export let counter = 0;
+  /**
+   * comment
+   * @type {string}
+   */
+  export let kiss;
 
   function handleClick() {
     counter += 1;
@@ -20,9 +25,11 @@
   <slot name="post" />
 </button>
 
-<style>
+<style lang="scss">
+  @import '../../styles/variables.scss';
+
   button {
-    background: darkred;
+    background: $base-color;
     border: none;
     color: white;
     display: flex;
@@ -31,6 +38,6 @@
   }
 
   button[disabled] {
-    background: gray;
+    background: $border-dark;
   }
 </style>

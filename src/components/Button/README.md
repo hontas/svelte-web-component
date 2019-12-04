@@ -8,7 +8,7 @@
 
 ## attributes
 
-- disabled
-- readonly
-- title
-- counter
+- disabled {boolean} | default "false"
+- counter {number} | default "0"
+- kiss {any} | required  
+  - comment

@@ -15,6 +15,9 @@
     "storybook": "start-storybook -s dist",
     "storybook:build": "build-storybook"
   },
+  "browserslist": [
+    "Chrome 57"
+  ],
   "dependencies": {
     "lit-html": "^1.0.0",
     "lit-element": "^2.0.1"
@@ -24,13 +27,18 @@
     "@open-wc/testing": "^2.0.0",
     "@open-wc/testing-karma": "^3.2.8",
     "@storybook/html": "^5.2.7",
+    "autoprefixer": "^9.7.3",
     "babel-loader": "^8.0.6",
+    "chalk": "^3.0.0",
+    "doiuse": "^4.2.0",
     "eslint": "^6.7.2",
     "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-svelte3": "^2.7.3",
     "glob": "^7.1.6",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
+    "node-sass": "^4.13.0",
+    "postcss": "^7.0.23",
     "prettier": "^1.19.1",
     "prettier-plugin-svelte": "^0.7.0",
     "rollup": "^1.27.6",

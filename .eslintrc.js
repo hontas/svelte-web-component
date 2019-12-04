@@ -15,7 +15,7 @@ module.exports = {
     'import/extensions': ['error', 'always', { js: 'never' }],
     'import/no-extraneous-dependencies': [
       'error',
-      { devDependencies: ['**/*.test.js', '**/*.spec.js', , 'script/*.js'] },
+      { devDependencies: ['**/*.test.js', '**/*.spec.js', 'script/*.js', '*.js'] },
     ],
   },
   plugins: ['svelte3'],
@@ -30,5 +30,6 @@ module.exports = {
   ],
   settings: {
     'svelte3/compiler-options': svelteConfig,
+    'svelte3/ignore-styles': attr => attr.lang,
   },
 };
