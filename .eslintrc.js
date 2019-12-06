@@ -1,7 +1,4 @@
-const svelteConfig = require('./svelte.config');
-
-const svelteCompilerOptions = Object.assign({}, svelteConfig);
-delete svelteCompilerOptions.preprocess;
+const svelteConfig = { customElement: true };
 
 module.exports = {
   extends: ['@open-wc/eslint-config', 'eslint-config-prettier'],
@@ -34,7 +31,7 @@ module.exports = {
     },
   ],
   settings: {
-    'svelte3/compiler-options': svelteCompilerOptions,
+    'svelte3/compiler-options': svelteConfig,
     'svelte3/ignore-styles': attr => attr.lang,
   },
 };
