@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "rollup --config --watch",
     "build": "rollup --config",
+    "lint": "eslint src --ext .js,.svelte",
     "generateDocs": "node script/generateDocs.js",
     "test": "karma start --coverage",
     "test:watch": "karma start --auto-watch=true --single-run=false",
@@ -23,6 +24,7 @@
     "lit-element": "^2.0.1"
   },
   "devDependencies": {
+    "eslint-plugin-min-butik": "file:./eslint-plugin-min-butik",
     "@open-wc/eslint-config": "^1.0.0",
     "@open-wc/testing": "^2.0.0",
     "@open-wc/testing-karma": "^3.2.8",

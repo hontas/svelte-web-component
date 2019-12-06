@@ -2,6 +2,7 @@
   import isBoolAttr from '../../utils/isBoolAttr';
 
   export let disabled = false;
+  export let disabledMofo = false;
   export let counter = 0;
   /**
    * comment
@@ -29,7 +30,7 @@
   @import '../../styles/variables.scss';
 
   button {
-    background: $base-color;
+    background-color: $base-color;
     border: none;
     color: white;
     display: flex;

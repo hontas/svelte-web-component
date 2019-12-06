@@ -8,6 +8,6 @@
 <svelte:options tag="ica-test" />
 <div class="Test">{variableWithDefault}</div>
 
-<style src="./Test.css">
-
+<style lang="scss">
+  $dark-gray: #bbb;
 </style>

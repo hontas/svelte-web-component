@@ -1,5 +1,8 @@
 const svelteConfig = require('./svelte.config');
 
+const svelteCompilerOptions = Object.assign({}, svelteConfig);
+delete svelteCompilerOptions.preprocess;
+
 module.exports = {
   extends: ['@open-wc/eslint-config', 'eslint-config-prettier'],
   parserOptions: {
@@ -8,6 +11,7 @@ module.exports = {
   },
   env: {
     es6: true,
+    node: true,
     browser: true,
   },
   rules: {
@@ -18,18 +22,19 @@ module.exports = {
       { devDependencies: ['**/*.test.js', '**/*.spec.js', 'script/*.js', '*.js'] },
     ],
   },
-  plugins: ['svelte3'],
+  plugins: ['svelte3', 'min-butik'],
   overrides: [
     {
       files: ['**/*.svelte'],
       processor: 'svelte3/svelte3',
       rules: {
         'import/no-mutable-exports': 0,
+        'min-butik/force-lower-export': 1,
       },
     },
   ],
   settings: {
-    'svelte3/compiler-options': svelteConfig,
+    'svelte3/compiler-options': svelteCompilerOptions,
     'svelte3/ignore-styles': attr => attr.lang,
   },
 };
