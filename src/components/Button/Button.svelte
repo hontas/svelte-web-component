@@ -16,6 +16,7 @@
 
   $: {
     if (isBoolAttr(disabled)) disabled = true;
+    if (isBoolAttr(disabledMofo)) disabledMofo = true;
   }
 </script>
 
