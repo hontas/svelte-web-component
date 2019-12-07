@@ -27,6 +27,7 @@ module.exports = {
       rules: {
         'import/no-mutable-exports': 0,
         'min-butik/force-lower-export': 1,
+        'min-butik/problematic-boolean': 1,
       },
     },
   ],

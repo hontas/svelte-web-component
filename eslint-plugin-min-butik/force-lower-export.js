@@ -33,7 +33,7 @@ module.exports = {
             if (allLowerCase.test(declaration.id.name)) return;
             context.report(
               node,
-              `Exported properties (${declaration.id.name}) must be in lowercase or it won't work in the DOM`
+              `Exported property '${declaration.id.name}' must be in lowercase or it won't work in the DOM`
             );
           });
         }
