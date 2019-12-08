@@ -15,8 +15,16 @@ module.exports = {
     'no-use-before-define': ['error', 'nofunc'],
     'import/extensions': ['error', 'always', { js: 'never' }],
     'import/no-extraneous-dependencies': [
-      'error',
-      { devDependencies: ['**/*.test.js', '**/*.spec.js', 'script/*.js', '*.js'] },
+      'warn',
+      {
+        devDependencies: [
+          '**/*.test.js',
+          '**/*.spec.js',
+          'script/*.js',
+          'eslint-plugin-min-butik/*.js',
+          '*.js',
+        ],
+      },
     ],
   },
   plugins: ['svelte3', 'min-butik'],

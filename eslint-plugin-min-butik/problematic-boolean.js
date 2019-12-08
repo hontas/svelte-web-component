@@ -7,6 +7,8 @@
 // Rule Definition
 //------------------------------------------------------------------------------
 
+const doctrine = require('doctrine');
+
 const isVariableDeclaration = ({ type }) => type === 'VariableDeclarator';
 const hasDefaultValue = ({ init }) => init && typeof init.value !== 'undefined';
 
@@ -24,7 +26,36 @@ module.exports = {
   },
   create(context) {
     const problematicNode = {};
+    const sourceCode = context.getSourceCode();
     let currLevel;
+
+    const getJSDocComment = node => {
+      const comments = sourceCode.getCommentsBefore(node);
+      const lastComment = comments[comments.length - 1];
+      if (!lastComment || lastComment.type !== 'Block') return null;
+
+      return doctrine.parse(`/*${lastComment.value}*/`, { unwrap: true });
+    };
+
+    /**
+     * Get types from JSDoc comment
+     * @param {ast} node
+     * @returns {array}
+     */
+    const getTypeFromJSDocComment = node => {
+      const jsDoc = getJSDocComment(node);
+      if (!jsDoc) return [];
+
+      const typeTag = jsDoc.tags.find(({ title }) => title === 'type');
+      if (!typeTag || !typeTag.type) return null;
+
+      if (typeTag.type.type === 'NameExpression') return [typeTag.type.name];
+      if (typeTag.type.type === 'UnionType') return typeTag.type.elements.map(({ name }) => name);
+
+      console.warn('Unhandled type', typeTag);
+
+      return [];
+    };
 
     return {
       ExportNamedDeclaration(node) {
@@ -34,8 +65,15 @@ module.exports = {
 
         if (type === 'VariableDeclaration' && kind === 'let') {
           declarations.forEach(declaration => {
-            if (isVariableDeclaration(declaration) && hasDefaultValue(declaration)) {
+            if (!isVariableDeclaration(declaration)) return;
+
+            if (hasDefaultValue(declaration)) {
               if (typeof declaration.init.value === 'boolean') {
+                problematicNode[currLevel][declaration.id.name] = node;
+              }
+            } else {
+              const types = getTypeFromJSDocComment(node);
+              if (types.length && types.includes('boolean')) {
                 problematicNode[currLevel][declaration.id.name] = node;
               }
             }

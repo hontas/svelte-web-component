@@ -6,7 +6,7 @@
   export let counter = 0;
   /**
    * comment
-   * @type {string}
+   * @type {boolean}
    */
   export let kiss;
 
@@ -16,7 +16,7 @@
 
   $: {
     if (isBoolAttr(disabled)) disabled = true;
-    // if (isBoolAttr(disabledMofo)) disabledMofo = true;
+    if (isBoolAttr(disabledMofo)) disabledMofo = true;
   }
 </script>
 
