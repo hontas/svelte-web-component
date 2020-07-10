@@ -1,6 +1,6 @@
 import { html, fixture, expect } from '@open-wc/testing';
 
-import '../dist/Button.js';
+import '../dist/Button';
 
 function wait(ms = 50) {
   return new Promise(resolve => {
@@ -10,9 +10,7 @@ function wait(ms = 50) {
 
 describe('IcaButton', () => {
   it('has a default title, counter and bool values', async () => {
-    const el = await fixture(html`
-      <ica-button></ica-button>
-    `);
+    const el = await fixture(html` <ica-button></ica-button> `);
 
     const button = el.shadowRoot.querySelector('button');
     const input = el.shadowRoot.querySelector('input');
@@ -25,24 +23,17 @@ describe('IcaButton', () => {
   });
 
   it('sets boolean values', async () => {
-    const el = await fixture(html`
-      <ica-button disabled readonly></ica-button>
-    `);
+    const el = await fixture(html` <ica-button disabled readonly></ica-button> `);
 
     const button = el.shadowRoot.querySelector('button');
     const input = el.shadowRoot.querySelector('input');
-
-    console.log('button', button);
-    console.log('input', input);
 
     expect(button.hasAttribute('disabled')).to.equal(true);
     expect(input.hasAttribute('readonly')).to.equal(true);
   });
 
   it('increases the counter on button click', async () => {
-    const el = await fixture(html`
-      <ica-button></ica-button>
-    `);
+    const el = await fixture(html` <ica-button></ica-button> `);
 
     el.shadowRoot.querySelector('button').click();
     await wait();
@@ -51,17 +42,13 @@ describe('IcaButton', () => {
   });
 
   it('can override the title via attribute', async () => {
-    const el = await fixture(html`
-      <ica-button title="attribute title"></ica-button>
-    `);
+    const el = await fixture(html` <ica-button title="attribute title"></ica-button> `);
 
     expect(el.title).to.equal('attribute title');
   });
 
   it('passes the a11y audit', async () => {
-    const el = await fixture(html`
-      <ica-button>text</ica-button>
-    `);
+    const el = await fixture(html` <ica-button>text</ica-button> `);
 
     await expect(el).shadowDom.to.be.accessible();
   });

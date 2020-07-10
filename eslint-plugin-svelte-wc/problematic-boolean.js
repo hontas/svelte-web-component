@@ -7,6 +7,7 @@
 // Rule Definition
 //------------------------------------------------------------------------------
 
+const t = require('@babel/types');
 const doctrine = require('doctrine');
 
 const isVariableDeclaration = ({ type }) => type === 'VariableDeclarator';
@@ -27,7 +28,9 @@ module.exports = {
   create(context) {
     const problematicNode = {};
     const sourceCode = context.getSourceCode();
+
     let currLevel;
+    let localName = 'getBool';
 
     const getJSDocComment = node => {
       const comments = sourceCode.getCommentsBefore(node);
@@ -58,6 +61,20 @@ module.exports = {
     };
 
     return {
+      ImportDeclaration(node) {
+        if (!t.isLiteral(node.source)) return;
+        if (/\/utils\/getBool(\.js)?/.test(node.source.value)) {
+          if (node.specifiers.length === 0) return;
+
+          const specifier = node.specifiers[0];
+
+          if (!t.isImportDefaultSpecifier(specifier)) return;
+          if (!t.isIdentifier(specifier.local)) return;
+
+          localName = specifier.local.name;
+        }
+      },
+
       ExportNamedDeclaration(node) {
         if (node.declaration == null) return;
 
@@ -81,24 +98,26 @@ module.exports = {
         }
       },
       LabeledStatement(node) {
-        if (node.body.type === 'BlockStatement') {
-          node.body.body.forEach(childNode => {
-            if (childNode.type !== 'IfStatement') return;
-            if (childNode.test.type !== 'CallExpression') return;
-            if (childNode.test.callee.name !== 'isBoolAttr') return;
+        if (!t.isBlockStatement(node.body)) return;
 
-            const variable = childNode.test.arguments[0];
+        node.body.body.forEach(childNode => {
+          if (!t.isExpressionStatement(childNode)) return;
+          if (!t.isAssignmentExpression(childNode.expression)) return;
+          if (!t.isIdentifier(childNode.expression.left)) return;
 
-            if (childNode.consequent.type !== 'ExpressionStatement') return;
-            if (childNode.consequent.expression.type !== 'AssignmentExpression') return;
-            if (childNode.consequent.expression.left.type !== 'Identifier') return;
-            if (childNode.consequent.expression.left.name !== variable.name) return;
-            if (childNode.consequent.expression.right.type !== 'Literal') return;
-            if (childNode.consequent.expression.right.value !== true) return;
+          const propName = childNode.expression.left.name;
 
-            delete problematicNode[currLevel][variable.name];
-          });
-        }
+          if (!t.isCallExpression(childNode.expression.right)) return;
+          if (childNode.expression.right.callee.name !== localName) return;
+          if (childNode.expression.right.arguments.length !== 1) return;
+
+          const variable = childNode.expression.right.arguments[0];
+
+          if (!t.isIdentifier(variable)) return;
+          if (variable.name !== propName) return;
+
+          delete problematicNode[currLevel][variable.name];
+        });
       },
       onCodePathStart(codePath) {
         currLevel = codePath.id;
@@ -109,7 +128,7 @@ module.exports = {
         Object.entries(problematicNode[codePath.id]).forEach(([name, node]) => {
           context.report(
             node,
-            `Exported boolean property '${name}' must convert '' (empty string) to true, cause '' === true in the DOM. $: { if (isBoolAttr(${name}) ${name} = true; ) }`
+            `Exported bool prop '${name}' must convert '' to true. $: { ${name} = ${localName}(${name}); }`
           );
         });
 

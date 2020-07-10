@@ -1,37 +1,37 @@
 <script>
-  import isBoolAttr from '../../utils/isBoolAttr';
+  import getBoolFromAttr from '../../utils/getBool';
 
-  export let disabled = false;
-  export let disabledMofo = false;
-  export let counter = 0;
   /**
    * comment
    * @type {boolean}
    */
-  export let kiss;
+  export let disabled = false;
+  export let counter = 0;
 
   function handleClick() {
     counter += 1;
   }
 
   $: {
-    if (isBoolAttr(disabled)) disabled = true;
-    if (isBoolAttr(disabledMofo)) disabledMofo = true;
+    disabled = getBoolFromAttr(disabled);
   }
 </script>
 
-<svelte:options tag="ica-button" />
+<svelte:options tag="x-button" />
 <button {disabled} on:click="{handleClick}">
   <slot name="pre" />
   <slot />
-  <slot name="post" />
+  <slot name="post">clicked: {counter}</slot>
 </button>
 
-<style lang="scss">
-  @import '../../styles/variables.scss';
+<style>
+  :host {
+    --Button--base-color: #c6538c;
+    --Button--disabled-color: #c6538ce1;
+  }
 
   button {
-    background-color: $base-color;
+    background-color: var(--Button--base-color);
     border: none;
     color: white;
     display: flex;
@@ -40,6 +40,6 @@
   }
 
   button[disabled] {
-    background: $border-dark;
+    background: var(--Button--disabled-color);
   }
 </style>

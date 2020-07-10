@@ -12,30 +12,25 @@ module.exports = {
     browser: true,
   },
   rules: {
+    'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-use-before-define': ['error', 'nofunc'],
     'import/extensions': ['error', 'always', { js: 'never' }],
     'import/no-extraneous-dependencies': [
       'warn',
       {
-        devDependencies: [
-          '**/*.test.js',
-          '**/*.spec.js',
-          'script/*.js',
-          'eslint-plugin-min-butik/*.js',
-          '*.js',
-        ],
+        devDependencies: true,
       },
     ],
   },
-  plugins: ['svelte3', 'min-butik'],
+  plugins: ['svelte3', 'svelte-wc'],
   overrides: [
     {
       files: ['**/*.svelte'],
       processor: 'svelte3/svelte3',
       rules: {
         'import/no-mutable-exports': 0,
-        'min-butik/force-lower-export': 1,
-        'min-butik/problematic-boolean': 1,
+        'svelte-wc/force-lower-export': 1,
+        'svelte-wc/problematic-boolean': 1,
       },
     },
   ],

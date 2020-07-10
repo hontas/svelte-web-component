@@ -32,9 +32,7 @@ svelteFiles.forEach(filename => {
       return doc;
     })
     .then(doc => {
-      // console.log(JSON.stringify(doc, null, 2));
       const readme = genReadme(doc);
-      // console.log(readme);
       const filePath = path.resolve(dir, 'README.md');
       fs.writeFileSync(filePath, readme, 'utf8');
     })

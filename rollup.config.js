@@ -21,12 +21,6 @@ export default {
       ...svelteConfig,
       dev: !production,
     }),
-
-    // If you have external dependencies installed from
-    // npm, you'll most likely need these plugins. In
-    // some cases you'll need additional configuration —
-    // consult the documentation for details:
-    // https://github.com/rollup/rollup-plugin-commonjs
     nodeResolve({
       browser: true,
       dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/'),

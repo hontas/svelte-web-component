@@ -1,5 +1,5 @@
 {
-  "name": "eslint-plugin-min-butik",
+  "name": "eslint-plugin-svelte-wc",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,5 +8,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@babel/types": "^7.10.4",
+    "doctrine": "^3.0.0"
+  }
 }

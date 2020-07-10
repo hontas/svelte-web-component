@@ -1,12 +1,22 @@
+import '../Section/Section.svelte';
+import './Button.svelte';
+
 export default { title: 'Button' };
 
-export const withText = () => '<ica-button>Hello World</ica-button>';
+export const examples = () => `
+  <x-section heading="with Text">
+    <x-button>Hello World</x-button>
+  </x-section>
 
-export const withSlots = () => `
-<ica-button>
-<p slot="pre">pre</p>
-Hello World
-<p slot="post">post</p>
-</ica-button>`;
+  <x-section heading="using slots">
+    <x-button>
+      <p slot="pre">pre</p>
+      Hello World
+      <p slot="post">post</p>
+    </x-button>
+  </x-section>
 
-export const withEmoji = () => '<ica-button>😀 😎 👍 💯</ica-button>';
+  <x-section heading="with emojis">
+    <x-button>😀 😎 👍 💯</x-button>
+  </x-section>
+`;
