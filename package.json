@@ -37,7 +37,7 @@
     "glob": "^7.1.6",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
-    "postcss": "^7.0.32",
+    "postcss": "^8.2.10",
     "prettier": "^2.0.5",
     "prettier-plugin-svelte": "^1.1.0",
     "rollup": "^2.21.0",
