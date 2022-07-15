@@ -46,7 +46,7 @@
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-svelte": "^5.2.3",
     "rollup-plugin-terser": "^6.1.0",
-    "svelte": "^3.24.0",
+    "svelte": "^3.49.0",
     "svelte-loader": "^2.13.6",
     "sveltedoc-parser": "^2.3.4",
     "webpack-merge": "^5.0.9"
