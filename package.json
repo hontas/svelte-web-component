@@ -23,7 +23,7 @@
     "@open-wc/testing-karma": "^3.4.7",
     "@storybook/addon-essentials": "^5.3.19",
     "@storybook/addons": "^5.3.19",
-    "@storybook/html": "^5.3.19",
+    "@storybook/html": "^6.5.13",
     "@storybook/theming": "^5.3.19",
     "autoprefixer": "^9.8.4",
     "babel-loader": "^8.1.0",
